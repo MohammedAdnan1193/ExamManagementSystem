@@ -115,10 +115,11 @@ input[type="text"],
 input[type="email"],
 input[type="password"],
 input[type="number"],
+input[type="date"],
+input[type="time"],
 select,
-input[name="name"],     /* Added selector for name input */
-input[name="branch"],   /* Added selector for branch input */
-.input-field {          /* Added a general class selector for consistency */
+textarea,
+.input-field {
   padding: 1.2rem;
   font-size: 1.2rem;
   width: 100% !important;
@@ -128,16 +129,58 @@ input[name="branch"],   /* Added selector for branch input */
   background-color: #fff;
   color: var(--text-color);
   transition: border-color var(--transition-duration), background-color var(--transition-duration);
-  box-sizing: border-box; /* Ensure inputs fill the container correctly */
+  box-sizing: border-box;
 }
 
 input:focus,
 select:focus,
+textarea:focus,
 .input-field:focus {
   border-color: var(--button-bg);
   outline: none;
   box-shadow: 0 0 5px var(--button-bg);
 }
+
+/* ===== Dark Theme Input Styling ===== */
+.dark-theme input[type="text"],
+.dark-theme input[type="email"],
+.dark-theme input[type="password"],
+.dark-theme input[type="number"],
+.dark-theme input[type="date"],
+.dark-theme input[type="time"],
+.dark-theme select,
+.dark-theme textarea,
+.dark-theme .input-field {
+  background-color: #333;
+  padding: 1.2rem;
+  font-size: 1.2rem;
+  width: 100% !important;
+  margin-bottom: 1.5rem;
+  border: 1px solid #555;
+  border-radius: var(--card-border-radius);
+  color: var(--text-color);
+}
+
+.dark-theme input:focus,
+.dark-theme select:focus,
+.dark-theme textarea:focus,
+.dark-theme .input-field:focus {
+  border-color: var(--button-bg);
+  box-shadow: 0 0 5px var(--button-bg);
+}
+
+/* ===== Placeholder Styling ===== */
+input::placeholder,
+textarea::placeholder {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 1rem;
+}
+
+.dark-theme input::placeholder,
+.dark-theme textarea::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
 
 /* Dark Theme Input Styling */
 .dark-theme input[type="text"],
