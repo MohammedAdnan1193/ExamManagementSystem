@@ -15,7 +15,7 @@
 
 /* Dark Theme Overrides */
 .dark-theme {
-  --bg-color: #000000; /* Fully black background */
+  --bg-color: #121212;
   --text-color: #e0e0e0;
   --card-bg: #2a2a2a;
   --button-bg: #4c50ff;
@@ -47,17 +47,33 @@ html, body {
   align-items: center;
 }
 
-/* ===== Root Container ===== */
+/* ===== Root Container with Background Image ===== */
 #root {
   min-height: 100vh;
   padding: 2rem;
   background-color: var(--bg-color);
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.85),
+      rgba(255, 255, 255, 0.85)
+    ),
+    url('https://k8school.com/wp-content/uploads/2023/11/Why-Are-Exams-Important-How-Do-They-Improve-Learning.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   animation: fadeIn 1s ease-in;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   transition: background-color var(--transition-duration);
+}
+
+.dark-theme #root {
+  background-image: linear-gradient(
+      rgba(0, 0, 0, 0.6),
+      rgba(0, 0, 0, 0.6)
+    ),
+    url('https://k8school.com/wp-content/uploads/2023/11/Why-Are-Exams-Important-How-Do-They-Improve-Learning.jpg');
 }
 
 /* ===== Card ===== */
@@ -94,55 +110,69 @@ html, body {
   opacity: 0.8;
 }
 
-/* ===== Input Fields (Expanded) ===== */
-input,
+/* ===== Input Fields ===== */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
 select,
-textarea {
-  padding: 1rem 1.5rem;
+input[name="name"],     /* Added selector for name input */
+input[name="branch"],   /* Added selector for branch input */
+.input-field {          /* Added a general class selector for consistency */
+  padding: 1.2rem;
   font-size: 1.2rem;
-  width: 100%;
+  width: 100% !important;
   margin-bottom: 1.5rem;
   border: 1px solid #ccc;
   border-radius: var(--card-border-radius);
   background-color: #fff;
   color: var(--text-color);
   transition: border-color var(--transition-duration), background-color var(--transition-duration);
+  box-sizing: border-box; /* Ensure inputs fill the container correctly */
 }
 
 input:focus,
 select:focus,
-textarea:focus {
+.input-field:focus {
   border-color: var(--button-bg);
   outline: none;
   box-shadow: 0 0 5px var(--button-bg);
 }
 
-/* Placeholder Styling */
-input::placeholder,
-textarea::placeholder {
-  color: rgba(0, 0, 0, 0.5);
-  font-size: 1rem;
-}
-
-/* ===== Dark Theme Input Styling ===== */
-.dark-theme input,
+/* Dark Theme Input Styling */
+.dark-theme input[type="text"],
+.dark-theme input[type="email"],
+.dark-theme input[type="password"],
+.dark-theme input[type="number"],
 .dark-theme select,
-.dark-theme textarea {
+.dark-theme input[name="name"],     /* Added selector for name input */
+.dark-theme input[name="branch"],   /* Added selector for branch input */
+.dark-theme .input-field {          /* Added a general class selector for consistency */
   background-color: #333;
-  color: var(--text-color);
+  padding: 1.2rem;
+  font-size: 1.2rem;
+  width: 100% !important;
+  margin-bottom: 1.5rem;
   border: 1px solid #555;
+  border-radius: var(--card-border-radius);
+  color: var(--text-color);
 }
 
 .dark-theme input:focus,
 .dark-theme select:focus,
-.dark-theme textarea:focus {
+.dark-theme .input-field:focus {
   border-color: var(--button-bg);
   box-shadow: 0 0 5px var(--button-bg);
 }
 
-.dark-theme input::placeholder,
-.dark-theme textarea::placeholder {
-  color: rgba(255, 255, 255, 0.6);
+/* Placeholder Styling */
+input::placeholder {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 1rem;
+}
+
+.dark-theme input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
 }
 
 /* ===== Button ===== */
