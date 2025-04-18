@@ -27,51 +27,68 @@ function AdminExamPage() {
   }, [admin])
 
   const fetchExams = async () => {
-    const res = await axios.get('http://localhost:8080/exams')
-    setExams(res.data)
+    try {
+      const res = await axios.get('http://localhost:8080/exams')
+      setExams(res.data)
+    } catch (err) {
+      console.error('Failed to fetch exams:', err)
+    }
   }
 
   const handleDelete = async (id) => {
-    await axios.delete(`http://localhost:8080/exams/${id}`)
-    fetchExams()
+    try {
+      await axios.delete(`http://localhost:8080/exams/${id}`)
+      fetchExams()
+    } catch (err) {
+      console.error('Error deleting exam:', err)
+    }
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    await axios.post('http://localhost:8080/exams/add', form)
-    setForm({
-      courseCode: '',
-      courseName: '',
-      examDate: '',
-      startTime: '',
-      endTime: '',
-      totalMarks: '',
-      semester: '',
-      branch: '',
-      prerequisites: ''
-    })
-    fetchExams()
+    try {
+      await axios.post('http://localhost:8080/exams/add', form)
+      setForm({
+        courseCode: '',
+        courseName: '',
+        examDate: '',
+        startTime: '',
+        endTime: '',
+        totalMarks: '',
+        semester: '',
+        branch: '',
+        prerequisites: ''
+      })
+      fetchExams()
+    } catch (err) {
+      console.error('Error adding exam:', err)
+    }
   }
+  console.log('Exams:', exams)
 
   return (
     <div className="admin-container">
       {/* Sidebar */}
       <aside className="sidebar">
         <h3>Exam List</h3>
-        <ul>
-          {exams.map((exam) => (
-            <li key={exam.examId} className="exam-card">
-              <strong>{exam.courseCode}</strong><br />
-              {exam.courseName}<br />
-              <small>{exam.branch}, Sem {exam.semester}</small><br />
-              <small>{exam.examDate}</small>
-              <br />
-              <button onClick={() => handleDelete(exam.examId)} className="delete-btn">
-                Delete
-              </button>
-            </li>
-          ))}
-        </ul>
+        {exams.length === 0 ? (
+          <p>No exams available. Add one!</p>
+        ) : (
+          <ul>
+            {exams.map((exam) => (
+              <li key={exam.examId} className="exam-card">
+                <strong>{exam.courseCode}</strong><br />
+                {exam.courseName}<br />
+                <small>{exam.branch}, Sem {exam.semester}</small><br />
+                <small>{exam.examDate}</small>
+                <br />
+                <button onClick={() => handleDelete(exam.examId)} className="delete-btn">
+                  Delete
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
       </aside>
 
       {/* Main Form Section */}
@@ -86,7 +103,7 @@ function AdminExamPage() {
           <input placeholder="Total Marks" type="number" value={form.totalMarks} onChange={(e) => setForm({ ...form, totalMarks: e.target.value })} required />
           <input placeholder="Semester" type="number" value={form.semester} onChange={(e) => setForm({ ...form, semester: e.target.value })} required />
           <input placeholder="Branch" value={form.branch} onChange={(e) => setForm({ ...form, branch: e.target.value })} required />
-          <input placeholder="Prerequisites" value={form.prerequisites} onChange={(e) => setForm({ ...form, prerequisites: e.target.value })} />
+          <input placeholder="Prerequisites (optional)" value={form.prerequisites} onChange={(e) => setForm({ ...form, prerequisites: e.target.value })} />
           <button type="submit">Add Exam</button>
         </form>
       </main>

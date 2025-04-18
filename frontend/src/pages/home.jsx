@@ -1,18 +1,18 @@
-// src/pages/Home.jsx
-import { useEffect } from 'react'
+import { useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { UserContext } from '../context/UserContext.jsx'
 
-function Home({ student }) {
+function Home() {
   const navigate = useNavigate()
+  const { student } = useContext(UserContext) // ⬅️ get student from context
 
-  // Redirect if student data is not present
   useEffect(() => {
     if (!student) {
       navigate('/login')
     }
   }, [student, navigate])
 
-  if (!student) return null // Avoid flickering
+  if (!student) return null
 
   return (
     <div style={{ padding: '2rem' }}>
@@ -22,8 +22,15 @@ function Home({ student }) {
       <p><strong>Branch:</strong> {student.branch.toUpperCase()}</p>
       <p><strong>Semester:</strong> {student.semester}</p>
 
-      {/* Add navigation or logout below if needed */}
-      <button onClick={() => navigate('/login')}>Logout</button>
+      <div style={{ marginTop: '2rem', display: 'flex', gap: '1rem' }}>
+        <button onClick={() => navigate('/student/register')}>
+          Go to Exam Registration
+        </button>
+
+        <button onClick={() => navigate('/login')}>
+          Logout
+        </button>
+      </div>
     </div>
   )
 }

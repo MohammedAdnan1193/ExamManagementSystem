@@ -6,6 +6,7 @@ import Home from './pages/home'
 import AdminLogin from './components/admin'
 import AdminExamPage from './pages/AdminExamPage'
 import AdminDashboard from './pages/AdminDashboard'
+import StudentRegistrationPage from './pages/StudentRegistrationPage'
 
 function App() {
   const [student, setStudent] = useState(null)
@@ -18,20 +19,24 @@ function App() {
 
   return (
     <Router>
-      <div className="flex-center" style={{ position: 'fixed', top: '1rem', right: '1rem', zIndex: 1000 }}>
+      <div
+        className="flex-center"
+        style={{ position: 'fixed', top: '1rem', right: '1rem', zIndex: 1000 }}
+      >
         <button onClick={() => setDark(prev => !prev)}>
           {dark ? '☀️ Light Mode' : '🌙 Dark Mode'}
         </button>
       </div>
 
       <Routes>
-        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/" element={<Navigate to="/home" />} />
         <Route path="/login" element={<Login setStudent={setStudent} />} />
         <Route path="/register" element={<Register />} />
         <Route path="/home" element={<Home student={student} />} />
         <Route path="/admin" element={<AdminLogin setAdmin={setAdmin} />} />
-        <Route path="/admin/exams" element={<AdminExamPage />} />
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/admin/exams" element={<AdminExamPage />} />
+        <Route path="/student/register" element={<StudentRegistrationPage />} />
       </Routes>
     </Router>
   )

@@ -1,11 +1,10 @@
 import { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { getAdminByEmail } from '../services/api'
+import { loginAdmin } from '../services/api' // ✅ updated to use POST login
 import { UserContext } from '../context/UserContext.jsx'
 
 function AdminLogin() {
   const { setAdmin } = useContext(UserContext)
-
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
@@ -14,22 +13,23 @@ function AdminLogin() {
   const handleLogin = async (e) => {
     e.preventDefault()
     setError('')
-
+  
     try {
-      const res = await getAdminByEmail(email)
-      const admin = res.data
-
-      if (admin.password === password) {
-        setAdmin(admin) // Save admin in context
-        alert(`Welcome, ${admin.name}!`)
+      const res = await loginAdmin({ email, password }) // returns true or false
+  
+      if (res.data === true) {
+        setAdmin({ email }) // Store minimal info; or fetch details if needed
+        alert(`Welcome, ${email}!`)
         navigate('/admin/dashboard')
       } else {
-        setError('Incorrect password')
+        setError('Invalid email or password')
       }
     } catch (err) {
-      setError('Admin not found')
+      console.error(err)
+      setError('Something went wrong. Please try again.')
     }
   }
+  
 
   return (
     <div style={{ padding: '2rem' }}>

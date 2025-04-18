@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { getStudentByEmail } from '../services/api'
+import { loginStudent } from '../services/api'
 import { UserContext } from '../context/UserContext.jsx'
 
 function Login() {
@@ -9,23 +9,19 @@ function Login() {
   const [error, setError] = useState('')
   const navigate = useNavigate()
 
-  // ✅ Moved useContext inside component
-  const { student, setStudent, admin, setAdmin } = useContext(UserContext)
+  const { setStudent } = useContext(UserContext)
 
   const handleLogin = async (e) => {
     e.preventDefault()
     setError('')
+
     try {
-      const response = await getStudentByEmail(email)
-      if (password === response.data.password) {
-        setStudent(response.data)
-      } else {
-        setStudent(null)
-        setError('Password did not match!')
-      }
+      const response = await loginStudent({ email, password })
+      setStudent(response.data)
+      navigate('/home')
     } catch (err) {
       setStudent(null)
-      setError('Student not found')
+      setError(err.response?.data?.message || 'Invalid email or password')
     }
   }
 
@@ -55,15 +51,6 @@ function Login() {
       </form>
 
       {error && <p style={{ color: 'red' }}>{error}</p>}
-
-      {student && (
-        <div style={{ marginTop: '2rem' }}>
-          <h3>Welcome, {student.name}</h3>
-          <p>Student ID: {student.studentId}</p>
-          <p>Branch: {student.branch}</p>
-          <p>Semester: {student.semester}</p>
-        </div>
-      )}
 
       <button
         onClick={() => navigate('/register')}
