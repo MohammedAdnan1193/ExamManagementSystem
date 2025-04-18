@@ -1,10 +1,14 @@
 package com.ooad.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;  // Add this import
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) // Ignore hibernate lazy loading fields during serialization
 
 @Entity
 public class Exam {
@@ -15,9 +19,16 @@ public class Exam {
 
     private String courseCode;
     private String courseName;
-    private LocalDate examDate;  
-    private LocalTime startTime; 
-    private LocalTime endTime;   
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate examDate;
+
+    @JsonFormat(pattern = "HH:mm")
+    private LocalTime startTime;
+
+    @JsonFormat(pattern = "HH:mm")
+    private LocalTime endTime;
+
     private int totalMarks;
     private int semester;
     private String branch;
@@ -47,6 +58,10 @@ public class Exam {
         return examId;
     }
 
+    public void setExamId(int examId) {
+        this.examId = examId;
+    }
+    
     public String getCourseCode() {
         return courseCode;
     }

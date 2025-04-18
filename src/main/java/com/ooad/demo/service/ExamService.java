@@ -20,7 +20,7 @@ public class ExamService {
     }
 
     // Get a single exam by ID
-    public Optional<Exam> getExamById(int examId) {  // Fixed: Changed String to int
+    public Optional<Exam> getExamById(int examId) { 
         return examRepository.findById(examId);
     }
 
@@ -30,7 +30,7 @@ public class ExamService {
     }
 
     // Delete an exam
-    public void deleteExam(int examId) {  // Fixed: Changed String to int
+    public void deleteExam(int examId) { 
         examRepository.deleteById(examId);
     }
 
