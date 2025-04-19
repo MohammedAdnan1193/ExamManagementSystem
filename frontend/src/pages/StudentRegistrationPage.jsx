@@ -29,8 +29,8 @@ function StudentRegistrationPage() {
 
   const fetchMyRegistrations = async () => {
     try {
-      const res = await axios.get(`http://localhost:8080/students/${student.studentId}/registrations`)
-      const ids = res.data.map((reg) => reg.exam.examId)
+      const res = await axios.get(`http://localhost:8080/registrations/student/${student.email}`)
+      const ids = res.data.map((reg) => reg.examId)  // ✅ Fix here
       setRegisteredExamIds(ids)
     } catch (err) {
       console.error('Error fetching registrations:', err)
@@ -38,17 +38,23 @@ function StudentRegistrationPage() {
   }
 
   const handleRegister = async (examId) => {
+    if (registeredExamIds.includes(examId)) {
+      alert('⚠️ You have already registered for this exam.')
+      return
+    }
+
     const registration = {
-      student: { studentId: student.studentId },
-      exam: { examId },
+      studentId: student.email,
+      examId: examId,
       status: 'Registered',
       attempts: 1,
-      registrationDate: new Date()
+      registrationDate: new Date().toISOString().split('T')[0],
+      paymentDone: false
     }
 
     try {
       await axios.post('http://localhost:8080/registrations/register', registration)
-      fetchMyRegistrations()
+      await fetchMyRegistrations()
       alert('✅ Registration completed successfully!')
     } catch (err) {
       console.error(err)

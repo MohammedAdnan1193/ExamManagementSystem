@@ -32,6 +32,23 @@ function AdminDashboard() {
       >
         Go to Exam Management
       </button>
+
+      {/* Button to go to All Students page */}
+      <button
+        onClick={() => navigate('/admin/students')}
+        style={{
+          marginTop: '1rem',
+          padding: '0.75rem 1.5rem',
+          backgroundColor: '#28a745',
+          color: 'white',
+          border: 'none',
+          borderRadius: '0.5rem',
+          boxShadow: '0px 4px 10px rgba(0,0,0,0.1)',
+          fontSize: '1rem',
+        }}
+      >
+        View All Students
+      </button>
     </div>
   )
 }

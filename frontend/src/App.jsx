@@ -7,7 +7,7 @@ import AdminLogin from './components/admin'
 import AdminExamPage from './pages/AdminExamPage'
 import AdminDashboard from './pages/AdminDashboard'
 import StudentRegistrationPage from './pages/StudentRegistrationPage'
-
+import AllStudentsPage from './pages/AllStudentsPage'
 function App() {
   const [student, setStudent] = useState(null)
   const [admin, setAdmin] = useState(null)
@@ -37,6 +37,8 @@ function App() {
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route path="/admin/exams" element={<AdminExamPage />} />
         <Route path="/student/register" element={<StudentRegistrationPage />} />
+        <Route path="/admin/students" element={<AllStudentsPage />} />
+
       </Routes>
     </Router>
   )

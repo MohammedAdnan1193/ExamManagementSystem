@@ -64,4 +64,13 @@ public class StudentController {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 
+    @GetMapping("/info/{email}")
+    public ResponseEntity<studentDTO> getStudentInfo(@PathVariable String email) {
+        Optional<Student> studentOpt = studentService.getStudentByEmail(email);
+        return studentOpt
+                .map(student -> ResponseEntity.ok(StudentMapper.toDTO(student)))
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+
 }

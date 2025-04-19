@@ -56,4 +56,17 @@ public class RegistrationController {
                                   .map(RegistrationMapper::toDTO)
                                   .collect(Collectors.toList());
     }
+    @GetMapping("/student/{email}")
+    public List<RegistrationDTO> getRegistrationsByStudentEmail(@PathVariable String email) {
+        Optional<Student> studentOpt = studentService.getStudentByEmail(email);
+        if (studentOpt.isEmpty()) {
+            throw new RuntimeException("Student not found with email: " + email);
+        }
+
+        List<Registration> registrations = registrationService.getRegistrationsByStudent(studentOpt.get());
+        return registrations.stream()
+                            .map(RegistrationMapper::toDTO)
+                            .collect(Collectors.toList());
+    }
+
 }
