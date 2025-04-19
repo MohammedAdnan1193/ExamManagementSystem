@@ -111,6 +111,21 @@ function StudentRegistrationPage() {
           ))}
         </ul>
       )}
+      <button
+        onClick={() => navigate('/home')}
+        style={{
+          marginTop: '1rem',
+          padding: '0.75rem 1.5rem',
+          backgroundColor: '#007bff',
+          color: 'white',
+          border: 'none',
+          borderRadius: '0.5rem',
+          boxShadow: '0px 4px 10px rgba(0,0,0,0.1)',
+          fontSize: '1rem',
+        }}
+      >
+        Back
+      </button>
     </div>
   )
 }

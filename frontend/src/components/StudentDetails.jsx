@@ -20,7 +20,10 @@ function StudentDetail({ student }) {
       <p><strong>Student ID:</strong> {student.studentId}</p>
       <p><strong>Email:</strong> {student.email}</p>
       <p><strong>Course:</strong> {student.course}</p>
+
+    
     </div>
+    
   );
 }
 

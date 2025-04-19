@@ -8,6 +8,8 @@ import AdminExamPage from './pages/AdminExamPage'
 import AdminDashboard from './pages/AdminDashboard'
 import StudentRegistrationPage from './pages/StudentRegistrationPage'
 import AllStudentsPage from './pages/AllStudentsPage'
+import ExamsPage from './pages/ExamsPage'
+import RegisteredStudentsPage from './pages/RegisteredStudentsPage'
 function App() {
   const [student, setStudent] = useState(null)
   const [admin, setAdmin] = useState(null)
@@ -35,10 +37,11 @@ function App() {
         <Route path="/home" element={<Home student={student} />} />
         <Route path="/admin" element={<AdminLogin setAdmin={setAdmin} />} />
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
-        <Route path="/admin/exams" element={<AdminExamPage />} />
+        <Route path="/admin/addexams" element={<AdminExamPage />} />
         <Route path="/student/register" element={<StudentRegistrationPage />} />
         <Route path="/admin/students" element={<AllStudentsPage />} />
-
+        <Route path="/admin/exams" element={<ExamsPage />} />
+        <Route path="/admin/exams/:examId/students" element={<RegisteredStudentsPage />} />
       </Routes>
     </Router>
   )

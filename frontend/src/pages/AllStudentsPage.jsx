@@ -1,10 +1,11 @@
 // AllStudentsPage.jsx
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'
 
 function AllStudentsPage() {
   const [students, setStudents] = useState([]);
-
+  const navigate = useNavigate()  
   useEffect(() => {
     fetchStudents();
   }, []);
@@ -30,7 +31,8 @@ function AllStudentsPage() {
               <th>Student ID</th>
               <th>Name</th>
               <th>Email</th>
-              <th>Course</th>
+              <th>Branch</th>
+              <th>USN</th>
             </tr>
           </thead>
           <tbody>
@@ -50,12 +52,28 @@ function AllStudentsPage() {
                 <td style={{ padding: '1rem' }}>{student.studentId}</td>
                 <td style={{ padding: '1rem' }}>{student.name}</td>
                 <td style={{ padding: '1rem' }}>{student.email}</td>
-                <td style={{ padding: '1rem' }}>{student.course}</td>
+                <td style={{ padding: '1rem' }}>{student.branch}</td> {/* Use student.branch */}
+                <td style={{ padding: '1rem' }}>{student.usn}</td> {/* Assuming 'usn' exists */}
               </tr>
             ))}
           </tbody>
         </table>
       )}
+      <button
+        onClick={() => navigate('/admin/dashboard')}
+        style={{
+          marginTop: '1rem',
+          padding: '0.75rem 1.5rem',
+          backgroundColor: '#007bff',
+          color: 'white',
+          border: 'none',
+          borderRadius: '0.5rem',
+          boxShadow: '0px 4px 10px rgba(0,0,0,0.1)',
+          fontSize: '1rem',
+        }}
+      >
+        Back
+      </button>
     </div>
   );
 }

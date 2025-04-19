@@ -18,7 +18,7 @@ function AdminDashboard() {
       <p>Email: {admin.email}</p>
 
       <button
-        onClick={() => navigate('/admin/exams')}
+        onClick={() => navigate('/admin/addexams')}
         style={{
           marginTop: '1rem',
           padding: '0.75rem 1.5rem',
