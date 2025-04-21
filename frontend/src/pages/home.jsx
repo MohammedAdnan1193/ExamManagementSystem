@@ -35,7 +35,7 @@ function Home() {
       <p><strong>Email:</strong> {student.email}</p>
       <p><strong>Branch:</strong> {student.branch?.toUpperCase()}</p>
       <p><strong>USN:</strong> {student.usn}</p>
-
+      <p><strong>Semester:</strong> {student.semester}</p>
       <div style={{ marginTop: '2rem', display: 'flex', gap: '1rem' }}>
         <button onClick={() => navigate('/student/register')}>
           Go to Exam Registration

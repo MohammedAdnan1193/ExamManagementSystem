@@ -12,7 +12,7 @@ function ExamsPage() {
 
   const fetchExams = async () => {
     try {
-      const res = await axios.get('http://localhost:8080/admin/exams'); // Replace with your actual API endpoint
+      const res = await axios.get('http://localhost:8080/admin/exams');
       setExams(res.data);
     } catch (err) {
       console.error('Error fetching exams:', err);
@@ -20,7 +20,7 @@ function ExamsPage() {
   };
 
   const viewRegisteredStudents = (examId) => {
-    navigate(`/admin/exams/${examId}/students`); // Navigate to the registered students page for that exam
+    navigate(`/admin/exams/${examId}/students`);
   };
 
   return (
@@ -29,35 +29,39 @@ function ExamsPage() {
       {exams.length === 0 ? (
         <p>No exams available.</p>
       ) : (
-        <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-          <thead>
-            <tr>
-              <th>Exam ID</th>
-              <th>Course Name</th>
-              <th>Branch</th>
-              <th>Exam Date</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {exams.map((exam) => (
-              <tr key={exam.examId} style={{ backgroundColor: '#f9f9f9', border: '1px solid #ccc', borderRadius: '8px', padding: '1rem' }}>
-                <td>{exam.examId}</td>
-                <td>{exam.courseName}</td>
-                <td>{exam.branch}</td>
-                <td>{exam.examDate}</td>
-                <td>
-                  <button
-                    onClick={() => viewRegisteredStudents(exam.examId)}
-                    style={{ padding: '0.5rem 1rem', backgroundColor: '#28a745', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
-                  >
-                    View Registered Students
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <div style={{ display: 'grid', gap: '1rem', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))' }}>
+          {exams.map((exam) => (
+            <div
+              key={exam.examId}
+              style={{
+                border: '1px solid #ccc',
+                borderRadius: '8px',
+                padding: '1rem',
+                backgroundColor: '#f9f9f9',
+                boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
+              }}
+            >
+              <h3>{exam.courseName}</h3>
+              <p><strong>Exam ID:</strong> {exam.examId}</p>
+              <p><strong>Branch:</strong> {exam.branch}</p>
+              <p><strong>Exam Date:</strong> {exam.examDate}</p>
+              <button
+                onClick={() => viewRegisteredStudents(exam.examId)}
+                style={{
+                  marginTop: '1rem',
+                  padding: '0.5rem 1rem',
+                  backgroundColor: '#28a745',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '4px',
+                  cursor: 'pointer'
+                }}
+              >
+                View Registered Students
+              </button>
+            </div>
+          ))}
+        </div>
       )}
     </div>
   );

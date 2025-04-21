@@ -10,6 +10,7 @@ import StudentRegistrationPage from './pages/StudentRegistrationPage'
 import AllStudentsPage from './pages/AllStudentsPage'
 import ExamsPage from './pages/ExamsPage'
 import RegisteredStudentsPage from './pages/RegisteredStudentsPage'
+import PaymentPage from './pages/PaymentPage'
 function App() {
   const [student, setStudent] = useState(null)
   const [admin, setAdmin] = useState(null)
@@ -42,6 +43,8 @@ function App() {
         <Route path="/admin/students" element={<AllStudentsPage />} />
         <Route path="/admin/exams" element={<ExamsPage />} />
         <Route path="/admin/exams/:examId/students" element={<RegisteredStudentsPage />} />
+        <Route path="/payment" element={<PaymentPage />} />
+
       </Routes>
     </Router>
   )

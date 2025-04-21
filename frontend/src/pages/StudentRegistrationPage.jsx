@@ -30,16 +30,32 @@ function StudentRegistrationPage() {
   const fetchMyRegistrations = async () => {
     try {
       const res = await axios.get(`http://localhost:8080/registrations/student/${student.email}`)
-      const ids = res.data.map((reg) => reg.examId)  // ✅ Fix here
+      const ids = res.data.map((reg) => reg.examId)
       setRegisteredExamIds(ids)
     } catch (err) {
       console.error('Error fetching registrations:', err)
     }
   }
 
-  const handleRegister = async (examId) => {
+  const handleRegister = async (exam) => {
+    const examId = exam.examId
+
     if (registeredExamIds.includes(examId)) {
       alert('⚠️ You have already registered for this exam.')
+      return
+    }
+
+    // Repeater: student semester > exam semester
+    if (student.semester > exam.semester) {
+      const repeaterFee = 1500
+      navigate('/payment', {
+        state: {
+          examId: examId,
+          examSemester: exam.semester,
+          studentEmail: student.email,
+          fee: repeaterFee
+        }
+      })
       return
     }
 
@@ -93,7 +109,7 @@ function StudentRegistrationPage() {
               )}
 
               <button
-                onClick={() => handleRegister(exam.examId)}
+                onClick={() => handleRegister(exam)}
                 disabled={registeredExamIds.includes(exam.examId)}
                 style={{
                   marginTop: '0.5rem',
