@@ -23,13 +23,20 @@ public class RegistrationService {
     public List<Registration> getAllRegistrations() {
         return registrationRepository.findAll();
     }
+
+    // Get registrations by a specific student
     public List<Registration> getRegistrationsByStudent(Student student) {
         return registrationRepository.findByStudent(student);
     }
-    
-    // Fetch registered students for a specific exam
-    public List<Student> getRegisteredStudentsForExam(Long examId) {
-        return registrationRepository.findByExamId(examId); // Assuming there's a method to find by examId
+
+    // Get all students registered for a specific exam
+    public List<Student> getRegisteredStudentsForExam(int examId) {
+        return registrationRepository.findStudentsByExamId(examId);
     }
+    // Get registrations by exam ID
+    public List<Registration> getRegistrationsByExamId(int examId) {
+        return registrationRepository.findByExamExamId(examId);
+    }
+
 
 }

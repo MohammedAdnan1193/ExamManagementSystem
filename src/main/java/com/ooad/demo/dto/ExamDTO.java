@@ -1,3 +1,4 @@
+
 package com.ooad.demo.dto;
 
 import java.time.LocalDate;
@@ -14,20 +15,6 @@ public class ExamDTO {
     private int totalMarks;
     private int semester;
     private String branch;
-
-    // Constructor
-    public ExamDTO(int examId, String courseCode, String courseName, LocalDate examDate, LocalTime startTime, 
-                    LocalTime endTime, int totalMarks, int semester, String branch) {
-        this.examId = examId;
-        this.courseCode = courseCode;
-        this.courseName = courseName;
-        this.examDate = examDate;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.totalMarks = totalMarks;
-        this.semester = semester;
-        this.branch = branch;
-    }
 
     // Getters and setters
     public int getExamId() {

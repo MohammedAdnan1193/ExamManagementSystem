@@ -6,9 +6,10 @@ public class studentDTO {
     private String email;
     private String branch;
     private String usn;
+    private int semester; // ✅ Add this field
+    private String password; 
 
     // Getters and setters
-
     public String getId() {
         return id;
     }
@@ -47,5 +48,21 @@ public class studentDTO {
 
     public void setUsn(String usn) {
         this.usn = usn;
+    }
+
+    public int getSemester() {        // ✅ Getter
+        return semester;
+    }
+
+    public void setSemester(int semester) {  // ✅ Setter
+        this.semester = semester;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
